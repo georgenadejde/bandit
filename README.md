@@ -1,23 +1,3 @@
-Just drop Files/ from every path:
-markdown---
-title: Bandit - OverTheWire
-user: h4ck47d4wn
-date: 2026-03-26
-description: Writeups for the Bandit wargame on OverTheWire — a beginner-friendly CTF focused on Linux command-line fundamentals and security concepts.
-tags:
-  - bandit
-  - overthewire
-  - ctf
-  - linux
-  - wargame
-  - ssh
-  - git
-  - ssl
-  - scripting
-  - bruteforce
-  - compression
-  - encoding
----
 # [Bandit - OverTheWire](https://overthewire.org/wargames/bandit/)
 
 #bandit #overthewire #ctf #linux #wargame
