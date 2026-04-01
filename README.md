@@ -1,9 +1,3 @@
----
-title: Bandit - OverTheWire
-user: h4ck47d4wn
-date: 2026-03-26
-description: Writeups for the Bandit wargame on OverTheWire, a beginner-friendly CTF focused on Linux command-line fundamentals and security concepts.
----
 # [Bandit - OverTheWire](https://overthewire.org/wargames/bandit/)
 
 - Bandit is a wargame on OverTheWire aimed at absolute beginners and it teaches the basics of Linux navigation, file manipulation, networking, and scripting through a series of increasingly difficult challenges.
