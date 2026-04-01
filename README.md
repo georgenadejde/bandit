@@ -1,10 +1,8 @@
 # [Bandit - OverTheWire](https://overthewire.org/wargames/bandit/)
 
-#bandit #overthewire #ctf #linux #wargame
-
-- Bandit is a wargame on OverTheWire aimed at absolute beginners — it teaches the basics of Linux navigation, file manipulation, networking, and scripting through a series of increasingly tricky challenges.
+- Bandit is a wargame on OverTheWire aimed at absolute beginners. It teaches the basics of Linux navigation, file manipulation, networking, and scripting through a series of increasingly difficult challenges.
 - Each level gives you SSH credentials. The goal is always to find the password for the next level, which is stored somewhere on the system.
-- The challenges introduce core tools: `find`, `grep`, `sort`, `nc`, `openssl`, `git`, `ssh`, and more — building up practical command-line intuition level by level.
+- The challenges introduce core tools: `find`, `grep`, `sort`, `nc`, `openssl`, `git`, `ssh`, and more.
 
 ## Levels
 
