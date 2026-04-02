@@ -1,0 +1,39 @@
+title: Bandit Writeups
+description: OverTheWire Bandit wargame writeups by George Nădejde
+baseurl: "/bandit"
+url: "https://georgenadejde.github.io"
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+future: true
+unpublished: true
+
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+  collections: false
+
+exclude:
+  - vendor/
+  - .bundle/
+  - Gemfile
+  - Gemfile.lock
+  - .nojekyll
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "writeup"
+  - scope:
+      path: "index.md"
+    values:
+      layout: "home"

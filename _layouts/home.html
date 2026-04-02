@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Writeups · George Nădejde</title>
+  <meta name="description" content="OverTheWire Bandit wargame writeups by George Nădejde — Linux, networking, scripting, cryptography." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="{{ '/' | relative_url }}" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+      <a href="https://github.com/georgenadejde/bandit" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>github</a>
+    </div>
+  </div>
+</nav>
+
+<main class="index-main">
+  <div class="container">
+
+    <div class="index-header">
+      <span class="section-tag">$ ssh bandit0@bandit.labs.overthewire.org -p 2220</span>
+      <h1 class="index-title">Bandit Writeups</h1>
+      <p class="index-desc">OverTheWire Bandit wargame — levels 8 through 33. Each writeup covers the solution methodology, tools used, and key takeaways.</p>
+      <a href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noopener noreferrer" class="otw-badge">
+        OverTheWire · Bandit ↗
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-num">{{ site.pages | where: "layout", "writeup" | where: "name", "README.md" | size }}</span>
+        <span class="stat-label">Levels</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="shownCount">0</span>
+        <span class="stat-label">Showing</span>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <span class="search-prefix">$ grep -r "</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="search levels..." autocomplete="off" spellcheck="false" />
+      <span class="search-suffix">" ./</span>
+    </div>
+
+    <!-- Tag filter -->
+    <div class="tag-filter" id="tagFilter">
+      <span class="tag-filter-label">$ filter --tag</span>
+      <div class="tag-list" id="tagList">
+        <button class="tag-btn active" data-tag="all">all</button>
+        {% assign all_tags = "" | split: "" %}
+        {% for page in site.pages %}
+          {% if page.tags %}
+            {% for tag in page.tags %}
+              {% unless all_tags contains tag %}
+                {% unless tag == "bandit" or tag == "overthewire" %}
+                  {% assign all_tags = all_tags | push: tag %}
+                {% endunless %}
+              {% endunless %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        {% assign sorted_tags = all_tags | compact | sort %}
+        {% for tag in sorted_tags %}
+        <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Level list -->
+    <div class="writeup-list" id="writeupList">
+      {% assign levels = site.pages | where: "name", "README.md" | sort: "path" %}
+      {% assign level_num = 0 %}
+      {% for page in levels %}
+        {% if page.layout == "writeup" %}
+          {% assign level_num = level_num | plus: 1 %}
+          <a href="{{ page.url | relative_url }}"
+             class="writeup-item"
+             data-name="{{ page.title | downcase | escape }}"
+             data-desc="{{ page.description | downcase | escape }}"
+             data-tags="{{ page.tags | join: ',' | downcase | escape }}">
+            <div class="writeup-item-left">
+              <span class="level-badge">{{ page.title | split: " " | last }}</span>
+              <div class="writeup-info">
+                <span class="writeup-name">{{ page.title }}</span>
+                {% if page.description %}
+                <span class="writeup-desc">{{ page.description }}</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              {% if page.tags %}
+                {% assign filtered_tags = page.tags | reject: "bandit" | reject: "overthewire" %}
+                {% assign tag_count = filtered_tags | size %}
+                {% for tag in filtered_tags limit: 3 %}
+                <span class="tag-pill">{{ tag }}</span>
+                {% endfor %}
+                {% if tag_count > 3 %}
+                <span class="tag-more">+{{ tag_count | minus: 3 }}</span>
+                {% endif %}
+              {% endif %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- No results -->
+    <div class="no-results" id="noResults" style="display:none;">
+      <span class="prompt">george@kali:~$</span> grep: no matches found
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const items = Array.from(document.querySelectorAll('.writeup-item'));
+const searchInput = document.getElementById('searchInput');
+const noResults = document.getElementById('noResults');
+const shownCount = document.getElementById('shownCount');
+const tagBtns = document.querySelectorAll('.tag-btn');
+
+let activeTag = 'all';
+let searchQuery = '';
+
+shownCount.textContent = items.length;
+
+function filterItems() {
+  let visible = 0;
+  items.forEach(item => {
+    const name = item.dataset.name || '';
+    const desc = item.dataset.desc || '';
+    const tags = item.dataset.tags || '';
+    const matchesSearch = !searchQuery || name.includes(searchQuery) || desc.includes(searchQuery) || tags.includes(searchQuery);
+    const matchesTag = activeTag === 'all' || tags.split(',').includes(activeTag);
+    const show = matchesSearch && matchesTag;
+    item.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+  shownCount.textContent = visible;
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+}
+
+searchInput.addEventListener('input', () => {
+  searchQuery = searchInput.value.toLowerCase().trim();
+  filterItems();
+});
+
+tagBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tagBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTag = btn.dataset.tag;
+    filterItems();
+  });
+});
+
+// Tag expand
+const tagList = document.getElementById('tagList');
+const expandBtn = document.createElement('button');
+expandBtn.className = 'tag-expand-btn';
+expandBtn.innerHTML = '<span id="tagExpandLabel">show more ↓</span>';
+tagList.appendChild(expandBtn);
+expandBtn.addEventListener('click', () => {
+  const expanded = tagList.classList.toggle('expanded');
+  expandBtn.querySelector('span').textContent = expanded ? 'show less ↑' : 'show more ↓';
+});
+</script>
+
+</body>
+</html>
