@@ -108,7 +108,12 @@
             </div>
             <div class="writeup-item-right">
               {% if page.tags %}
-                {% assign filtered_tags = page.tags | reject: "bandit" | reject: "overthewire" %}
+                {% assign filtered_tags = "" | split: "" %}
+                {% for tag in page.tags %}
+                  {% unless tag == "bandit" or tag == "overthewire" %}
+                    {% assign filtered_tags = filtered_tags | push: tag %}
+                  {% endunless %}
+                {% endfor %}
                 {% assign tag_count = filtered_tags | size %}
                 {% for tag in filtered_tags limit: 3 %}
                 <span class="tag-pill">{{ tag }}</span>
@@ -116,7 +121,7 @@
                 {% if tag_count > 3 %}
                 <span class="tag-more">+{{ tag_count | minus: 3 }}</span>
                 {% endif %}
-              {% endif %}
+              {% endif %}   
             </div>
           </a>
         {% endif %}
@@ -183,12 +188,12 @@ tagBtns.forEach(btn => {
   });
 });
 
-// Tag expand
 const tagList = document.getElementById('tagList');
+const tagFilter = document.getElementById('tagFilter');
 const expandBtn = document.createElement('button');
 expandBtn.className = 'tag-expand-btn';
-expandBtn.innerHTML = '<span id="tagExpandLabel">show more ↓</span>';
-tagList.appendChild(expandBtn);
+expandBtn.innerHTML = '<span>show more ↓</span>';
+tagFilter.appendChild(expandBtn);
 expandBtn.addEventListener('click', () => {
   const expanded = tagList.classList.toggle('expanded');
   expandBtn.querySelector('span').textContent = expanded ? 'show less ↑' : 'show more ↓';
