@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 24 · Bandit Writeups</title>
+  <meta name="description" content="A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 24</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_24/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">bruteforce</span>
+            
+          
+            
+            <span class="tag-pill">scripting</span>
+            
+          
+            
+            <span class="tag-pill">bash</span>
+            
+          
+            
+            <span class="tag-pill">netcat</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-24"><a href="https://overthewire.org/wargames/bandit/bandit24.html">Bandit Level 24</a></h1>
+
+<ul>
+  <li>There’s a daemon running on port <strong>30002</strong> that expects the current password followed by a <strong>4-digit secret PIN</strong> (0000–9999).
+    <ul>
+      <li>There’s no way to look up the PIN — we need to brute-force all 10,000 combinations.</li>
+    </ul>
+  </li>
+  <li>Wrote a bash script to generate all combinations and pipe them to <code class="language-plaintext highlighter-rouge">nc</code>.
+    <ul>
+      <li>Used a <code class="language-plaintext highlighter-rouge">for</code> loop from 0000 to 9999 with <code class="language-plaintext highlighter-rouge">printf "%04d"</code> to zero-pad single/double digit numbers.</li>
+      <li>Each line is formatted as <code class="language-plaintext highlighter-rouge">&lt;password&gt; &lt;pin&gt;</code> and echoed into a file, then the whole file is fed to <code class="language-plaintext highlighter-rouge">nc localhost 30002</code>.</li>
+      <li>Piped the output through <code class="language-plaintext highlighter-rouge">grep -v Wrong</code> to filter out all the failed attempts and see only the success line.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_24/b24_1.png" alt="" /></p>
+
+<ul>
+  <li>Got the response <code class="language-plaintext highlighter-rouge">Correct!</code> with the next password after the correct PIN was found.</li>
+</ul>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_23/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 23
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_25/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 25 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

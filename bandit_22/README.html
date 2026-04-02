@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 22 · Bandit Writeups</title>
+  <meta name="description" content="A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 22</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_22/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">cron</span>
+            
+          
+            
+            <span class="tag-pill">cronjob</span>
+            
+          
+            
+            <span class="tag-pill">bash</span>
+            
+          
+            
+            <span class="tag-pill">scripting</span>
+            
+          
+            
+            <span class="tag-pill">md5</span>
+            
+          
+            
+            <span class="tag-pill">linux</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-22"><a href="https://overthewire.org/wargames/bandit/bandit22.html">Bandit Level 22</a></h1>
+
+<ul>
+  <li>There’s a cron job running periodically as <strong>bandit23</strong>.
+    <ul>
+      <li>The goal is to read the script it’s running and figure out where it’s writing the password.</li>
+    </ul>
+  </li>
+  <li>Checked <code class="language-plaintext highlighter-rouge">/etc/cron.d/cronjob_bandit23</code> to find the script path, then read the script itself.
+    <ul>
+      <li>The script generates an <code class="language-plaintext highlighter-rouge">md5sum</code> of the string <code class="language-plaintext highlighter-rouge">"I am user bandit23"</code> and writes the bandit23 password to <code class="language-plaintext highlighter-rouge">/tmp/&lt;that_hash&gt;</code>.</li>
+      <li>We can reproduce the same hash ourselves: <code class="language-plaintext highlighter-rouge">echo "I am user bandit23" | md5sum | cut -d ' ' -f 1</code> gives us the filename.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_22/b22_1.png" alt="" /></p>
+
+<ul>
+  <li>Read <code class="language-plaintext highlighter-rouge">/tmp/&lt;hash&gt;</code> and got the password.</li>
+</ul>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_21/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 21
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_23/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 23 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 23 · Bandit Writeups</title>
+  <meta name="description" content="A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 23</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_23/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">cron</span>
+            
+          
+            
+            <span class="tag-pill">cronjob</span>
+            
+          
+            
+            <span class="tag-pill">bash</span>
+            
+          
+            
+            <span class="tag-pill">scripting</span>
+            
+          
+            
+            <span class="tag-pill">suid</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-23"><a href="https://overthewire.org/wargames/bandit/bandit23.html">Bandit Level 23</a></h1>
+
+<p>#bandit #overthewire #cron #cronjob #bash #scripting</p>
+
+<ul>
+  <li>
+    <p>A cron job runs as <strong>bandit24</strong> and executes every script it finds in <code class="language-plaintext highlighter-rouge">/var/spool/bandit24/</code>, then deletes them. We can abuse this to run our own script as bandit24 and have it dump the password somewhere we can read it.</p>
+  </li>
+  <li>I initially thought the script executed every second (which would’ve been too fast to work reliably) so I wrote the script in <code class="language-plaintext highlighter-rouge">/tmp</code> first rather than dropping it straight into <code class="language-plaintext highlighter-rouge">/var/spool/bandit24/</code>.
+    <ul>
+      <li>The script needed a <strong>shebang line</strong> (<code class="language-plaintext highlighter-rouge">#!/bin/bash</code>) so the shell knows how to run it.</li>
+      <li>Then a <code class="language-plaintext highlighter-rouge">cat /etc/bandit_pass/bandit24 &gt;&gt; /tmp/rez</code> line to read the password and append it to a file in <code class="language-plaintext highlighter-rouge">/tmp</code> that I have access to.</li>
+      <li>Had to <code class="language-plaintext highlighter-rouge">chmod 777</code> both the script and the <code class="language-plaintext highlighter-rouge">/tmp/rez</code> output file, otherwise bandit24 wouldn’t have write permission to drop the result there.</li>
+    </ul>
+  </li>
+  <li>Moved the script into <code class="language-plaintext highlighter-rouge">/var/spool/bandit24/</code> and waited for the cron job to fire.</li>
+</ul>
+
+<p><img src="/bandit/bandit_23/b23_1.png" alt="" /></p>
+
+<ul>
+  <li>After a minute, checked <code class="language-plaintext highlighter-rouge">/tmp/rez</code> — the password was there.</li>
+</ul>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_22/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 22
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_24/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 24 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

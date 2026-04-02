@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 26 · Bandit Writeups</title>
+  <meta name="description" content="Good job getting a shell! Now hurry and grab the password for bandit27!" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 26</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_26/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">ssh</span>
+            
+          
+            
+            <span class="tag-pill">more</span>
+            
+          
+            
+            <span class="tag-pill">vim</span>
+            
+          
+            
+            <span class="tag-pill">shell</span>
+            
+          
+            
+            <span class="tag-pill">restrictedshell</span>
+            
+          
+            
+            <span class="tag-pill">escape</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">Good job getting a shell! Now hurry and grab the password for bandit27!</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-26"><a href="https://overthewire.org/wargames/bandit/bandit26.html">Bandit Level 26</a></h1>
+
+<ul>
+  <li>bandit26’s default shell (set in <code class="language-plaintext highlighter-rouge">/etc/passwd</code>) is not <code class="language-plaintext highlighter-rouge">/bin/bash</code>, but a custom script that just runs <code class="language-plaintext highlighter-rouge">more</code> on a text file and then exits.
+    <ul>
+      <li>So even if we SSH in with a valid key, we get kicked out immediately after <code class="language-plaintext highlighter-rouge">more</code> finishes.</li>
+    </ul>
+  </li>
+  <li>The key to escaping <code class="language-plaintext highlighter-rouge">more</code> is to <strong>make the terminal window small enough</strong> that the text doesn’t fit on screen and <code class="language-plaintext highlighter-rouge">more</code> is forced into interactive/pager mode instead of just printing and quitting.
+    <ul>
+      <li>Zoomed in a lot in the terminal to reduce the visible lines, then SSHed in
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">more</code> paused waiting for input.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_26/b26_1.png" alt="" /></p>
+
+<ul>
+  <li>Once stuck in <code class="language-plaintext highlighter-rouge">more</code>, pressed <code class="language-plaintext highlighter-rouge">v</code> to open the current file in <strong>vim</strong>.
+    <ul>
+      <li>From vim, used <code class="language-plaintext highlighter-rouge">:set shell=/bin/bash</code> to change the shell vim would use, then <code class="language-plaintext highlighter-rouge">:shell</code> to drop into a real bash session.</li>
+    </ul>
+  </li>
+  <li>From there explored the home directory, found a <code class="language-plaintext highlighter-rouge">to do</code> file with the SUID bit set, ran <code class="language-plaintext highlighter-rouge">cat</code> on it and got the flag.</li>
+</ul>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_25/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 25
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_27/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 27 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

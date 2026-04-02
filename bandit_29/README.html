@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 29 · Bandit Writeups</title>
+  <meta name="description" content="There is a git repository at ssh://bandit29-git@bandit.labs.overthewire.org/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 29</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_29/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">git</span>
+            
+          
+            
+            <span class="tag-pill">gitbranch</span>
+            
+          
+            
+            <span class="tag-pill">gitcheckout</span>
+            
+          
+            
+            <span class="tag-pill">gitlog</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">There is a git repository at ssh://bandit29-git@bandit.labs.overthewire.org/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-29"><a href="https://overthewire.org/wargames/bandit/bandit29.html">Bandit Level 29</a></h1>
+
+<ul>
+  <li>Cloned the repo again at <code class="language-plaintext highlighter-rouge">ssh://bandit29-git@localhost/home/bandit29-git/repo</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">README.md</code> on the main branch says “no passwords in production!”
+    <ul>
+      <li>so the password isn’t here, but the hint tells us to look elsewhere.</li>
+    </ul>
+  </li>
+  <li>The key is to check the <strong>other branches</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">git branch -a</code> lists all branches including remote ones.</li>
+      <li>Found a <code class="language-plaintext highlighter-rouge">dev</code> branch
+        <ul>
+          <li>checked it out with <code class="language-plaintext highlighter-rouge">git checkout dev</code>.</li>
+        </ul>
+      </li>
+      <li>The <code class="language-plaintext highlighter-rouge">README.md</code> on that branch had the actual password.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_29/b29_1.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_2.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_3.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_4.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_5.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_6.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_7.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_8.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_9.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_10.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_11.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_12.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_13.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_29/b29_14.png" alt="" /></p>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">bbc96594b4e001778eee9975372716b2</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_28/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 28
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_30/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 30 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

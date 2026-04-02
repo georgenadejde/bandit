@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Writeups · George Nădejde</title>
+  <meta name="description" content="OverTheWire Bandit wargame writeups by George Nădejde — Linux, networking, scripting, cryptography." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+      <a href="https://github.com/georgenadejde/bandit" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>github</a>
+    </div>
+  </div>
+</nav>
+
+<main class="index-main">
+  <div class="container">
+
+    <div class="index-header">
+      <span class="section-tag">$ ssh bandit0@bandit.labs.overthewire.org -p 2220</span>
+      <h1 class="index-title">Bandit Writeups</h1>
+      <p class="index-desc">OverTheWire Bandit wargame — levels 8 through 33. Each writeup covers the solution methodology, tools used, and key takeaways.</p>
+      <a href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noopener noreferrer" class="otw-badge">
+        OverTheWire · Bandit ↗
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-num">26</span>
+        <span class="stat-label">Levels</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="shownCount">0</span>
+        <span class="stat-label">Showing</span>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <span class="search-prefix">$ grep -r "</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="search levels..." autocomplete="off" spellcheck="false" />
+      <span class="search-suffix">" ./</span>
+    </div>
+
+    <!-- Tag filter -->
+    <div class="tag-filter" id="tagFilter">
+      <span class="tag-filter-label">$ filter --tag</span>
+      <div class="tag-list" id="tagList">
+        <button class="tag-btn active" data-tag="all">all</button>
+        
+        
+        
+        
+        <button class="tag-btn" data-tag="base64">base64</button>
+        
+        <button class="tag-btn" data-tag="bash">bash</button>
+        
+        <button class="tag-btn" data-tag="bashrc">bashrc</button>
+        
+        <button class="tag-btn" data-tag="binary">binary</button>
+        
+        <button class="tag-btn" data-tag="bruteforce">bruteforce</button>
+        
+        <button class="tag-btn" data-tag="bzip2">bzip2</button>
+        
+        <button class="tag-btn" data-tag="commithistory">commithistory</button>
+        
+        <button class="tag-btn" data-tag="cron">cron</button>
+        
+        <button class="tag-btn" data-tag="cronjob">cronjob</button>
+        
+        <button class="tag-btn" data-tag="diff">diff</button>
+        
+        <button class="tag-btn" data-tag="encoding">encoding</button>
+        
+        <button class="tag-btn" data-tag="escape">escape</button>
+        
+        <button class="tag-btn" data-tag="etcpasswd">etcpasswd</button>
+        
+        <button class="tag-btn" data-tag="filecomparison">filecomparison</button>
+        
+        <button class="tag-btn" data-tag="git">git</button>
+        
+        <button class="tag-btn" data-tag="gitbranch">gitbranch</button>
+        
+        <button class="tag-btn" data-tag="gitcheckout">gitcheckout</button>
+        
+        <button class="tag-btn" data-tag="gitclone">gitclone</button>
+        
+        <button class="tag-btn" data-tag="gitignore">gitignore</button>
+        
+        <button class="tag-btn" data-tag="gitlog">gitlog</button>
+        
+        <button class="tag-btn" data-tag="gitpush">gitpush</button>
+        
+        <button class="tag-btn" data-tag="gitshow">gitshow</button>
+        
+        <button class="tag-btn" data-tag="gittag">gittag</button>
+        
+        <button class="tag-btn" data-tag="grep">grep</button>
+        
+        <button class="tag-btn" data-tag="gzip">gzip</button>
+        
+        <button class="tag-btn" data-tag="hexdump">hexdump</button>
+        
+        <button class="tag-btn" data-tag="linux">linux</button>
+        
+        <button class="tag-btn" data-tag="md5">md5</button>
+        
+        <button class="tag-btn" data-tag="more">more</button>
+        
+        <button class="tag-btn" data-tag="nc">nc</button>
+        
+        <button class="tag-btn" data-tag="netcat">netcat</button>
+        
+        <button class="tag-btn" data-tag="networking">networking</button>
+        
+        <button class="tag-btn" data-tag="nmap">nmap</button>
+        
+        <button class="tag-btn" data-tag="openssl">openssl</button>
+        
+        <button class="tag-btn" data-tag="permissions">permissions</button>
+        
+        <button class="tag-btn" data-tag="portscanning">portscanning</button>
+        
+        <button class="tag-btn" data-tag="privatekey">privatekey</button>
+        
+        <button class="tag-btn" data-tag="restrictedshell">restrictedshell</button>
+        
+        <button class="tag-btn" data-tag="rot13">rot13</button>
+        
+        <button class="tag-btn" data-tag="scripting">scripting</button>
+        
+        <button class="tag-btn" data-tag="setuid">setuid</button>
+        
+        <button class="tag-btn" data-tag="shell">shell</button>
+        
+        <button class="tag-btn" data-tag="shellvariables">shellvariables</button>
+        
+        <button class="tag-btn" data-tag="sort">sort</button>
+        
+        <button class="tag-btn" data-tag="ssh">ssh</button>
+        
+        <button class="tag-btn" data-tag="ssl">ssl</button>
+        
+        <button class="tag-btn" data-tag="strings">strings</button>
+        
+        <button class="tag-btn" data-tag="suid">suid</button>
+        
+        <button class="tag-btn" data-tag="tar">tar</button>
+        
+        <button class="tag-btn" data-tag="tls">tls</button>
+        
+        <button class="tag-btn" data-tag="tr">tr</button>
+        
+        <button class="tag-btn" data-tag="uniq">uniq</button>
+        
+        <button class="tag-btn" data-tag="uppercase">uppercase</button>
+        
+        <button class="tag-btn" data-tag="vim">vim</button>
+        
+        <button class="tag-btn" data-tag="xxd">xxd</button>
+        
+      </div>
+    </div>
+
+    <!-- Level list -->
+    <div class="writeup-list" id="writeupList">
+      
+      
+      
+        
+          
+          <a href="/bandit/bandit_8/README.html"
+             class="writeup-item"
+             data-name="bandit level 8"
+             data-desc="the password for the next level is stored in the file data.txt and is the only line of text that occurs only once"
+             data-tags="bandit,overthewire,sort,uniq">
+            <div class="writeup-item-left">
+              <span class="level-badge">8</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 8</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in the file data.txt and is the only line of text that occurs only once</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">sort</span>
+                
+                <span class="tag-pill">uniq</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_9/README.html"
+             class="writeup-item"
+             data-name="bandit level 9"
+             data-desc="the password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters."
+             data-tags="bandit,overthewire,strings,grep,binary,linux">
+            <div class="writeup-item-left">
+              <span class="level-badge">9</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 9</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">strings</span>
+                
+                <span class="tag-pill">grep</span>
+                
+                <span class="tag-pill">binary</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_10/README.html"
+             class="writeup-item"
+             data-name="bandit level 10"
+             data-desc="the password for the next level is stored in the file data.txt, which contains base64 encoded data"
+             data-tags="bandit,overthewire,base64,encoding">
+            <div class="writeup-item-left">
+              <span class="level-badge">10</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 10</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in the file data.txt, which contains base64 encoded data</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">base64</span>
+                
+                <span class="tag-pill">encoding</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_11/README.html"
+             class="writeup-item"
+             data-name="bandit level 11"
+             data-desc="the password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (a-z) letters have been rotated by 13 positions"
+             data-tags="bandit,overthewire,rot13,tr,encoding">
+            <div class="writeup-item-left">
+              <span class="level-badge">11</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 11</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">rot13</span>
+                
+                <span class="tag-pill">tr</span>
+                
+                <span class="tag-pill">encoding</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_12/README.html"
+             class="writeup-item"
+             data-name="bandit level 12"
+             data-desc="the password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. for this level it may be useful to create a directory under /tmp in which you can work. use mkdir with a hard to guess directory name. or better, use the command “mktemp -d”. then copy the datafile using cp, and rename it using mv (read the manpages!)"
+             data-tags="bandit,overthewire,xxd,hexdump,gzip,bzip2,tar">
+            <div class="writeup-item-left">
+              <span class="level-badge">12</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 12</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work. Use mkdir with a hard to guess directory name. Or better, use the command “mktemp -d”. Then copy the datafile using cp, and rename it using mv (read the manpages!)</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">xxd</span>
+                
+                <span class="tag-pill">hexdump</span>
+                
+                <span class="tag-pill">gzip</span>
+                
+                
+                <span class="tag-more">+2</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_13/README.html"
+             class="writeup-item"
+             data-name="bandit level 13"
+             data-desc="the password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. for this level, you don’t get the next password, but you get a private ssh key that can be used to log into the next level. look at the commands that logged you into previous bandit levels, and find out how to use the key for this level."
+             data-tags="bandit,overthewire,ssh,privatekey">
+            <div class="writeup-item-left">
+              <span class="level-badge">13</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 13</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Look at the commands that logged you into previous bandit levels, and find out how to use the key for this level.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">ssh</span>
+                
+                <span class="tag-pill">privatekey</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_14/README.html"
+             class="writeup-item"
+             data-name="bandit level 14"
+             data-desc="the password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost."
+             data-tags="bandit,overthewire,netcat,nc,networking">
+            <div class="writeup-item-left">
+              <span class="level-badge">14</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 14</span>
+                
+                <span class="writeup-desc">The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">netcat</span>
+                
+                <span class="tag-pill">nc</span>
+                
+                <span class="tag-pill">networking</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_15/README.html"
+             class="writeup-item"
+             data-name="bandit level 15"
+             data-desc="the password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using ssl/tls encryption."
+             data-tags="bandit,overthewire,ssl,tls,openssl,netcat">
+            <div class="writeup-item-left">
+              <span class="level-badge">15</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 15</span>
+                
+                <span class="writeup-desc">The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">ssl</span>
+                
+                <span class="tag-pill">tls</span>
+                
+                <span class="tag-pill">openssl</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_16/README.html"
+             class="writeup-item"
+             data-name="bandit level 16"
+             data-desc="the credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. first find out which of these ports have a server listening on them. then find out which of those speak ssl/tls and which don’t. there is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it."
+             data-tags="bandit,overthewire,ssl,tls,openssl,nmap,portscanning,ssh,privatekey">
+            <div class="writeup-item-left">
+              <span class="level-badge">16</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 16</span>
+                
+                <span class="writeup-desc">The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">ssl</span>
+                
+                <span class="tag-pill">tls</span>
+                
+                <span class="tag-pill">openssl</span>
+                
+                
+                <span class="tag-more">+4</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_17/README.html"
+             class="writeup-item"
+             data-name="bandit level 17"
+             data-desc="there are 2 files in the homedirectory: passwords.old and passwords.new. the password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new"
+             data-tags="bandit,overthewire,diff,filecomparison">
+            <div class="writeup-item-left">
+              <span class="level-badge">17</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 17</span>
+                
+                <span class="writeup-desc">There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">diff</span>
+                
+                <span class="tag-pill">filecomparison</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_18/README.html"
+             class="writeup-item"
+             data-name="bandit level 18"
+             data-desc="the password for the next level is stored in a file readme in the homedirectory. unfortunately, someone has modified .bashrc to log you out when you log in with ssh."
+             data-tags="bandit,overthewire,ssh,bashrc">
+            <div class="writeup-item-left">
+              <span class="level-badge">18</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 18</span>
+                
+                <span class="writeup-desc">The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">ssh</span>
+                
+                <span class="tag-pill">bashrc</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_19/README.html"
+             class="writeup-item"
+             data-name="bandit level 19"
+             data-desc="to gain access to the next level, you should use the setuid binary in the homedirectory. execute it without arguments to find out how to use it. the password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary."
+             data-tags="bandit,overthewire,setuid,suid,permissions">
+            <div class="writeup-item-left">
+              <span class="level-badge">19</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 19</span>
+                
+                <span class="writeup-desc">To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">setuid</span>
+                
+                <span class="tag-pill">suid</span>
+                
+                <span class="tag-pill">permissions</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_20/README.html"
+             class="writeup-item"
+             data-name="bandit level 20"
+             data-desc="there is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. it then reads a line of text from the connection and compares it to the password in the previous level (bandit20). if the password is correct, it will transmit the password for the next level (bandit21)."
+             data-tags="bandit,overthewire,setuid,suid,nc,networking">
+            <div class="writeup-item-left">
+              <span class="level-badge">20</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 20</span>
+                
+                <span class="writeup-desc">There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">setuid</span>
+                
+                <span class="tag-pill">suid</span>
+                
+                <span class="tag-pill">nc</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_21/README.html"
+             class="writeup-item"
+             data-name="bandit level 21"
+             data-desc="a program is running automatically at regular intervals from cron, the time-based job scheduler. look in /etc/cron.d/ for the configuration and see what command is being executed"
+             data-tags="bandit,overthewire,cron,cronjob,bash,scripting">
+            <div class="writeup-item-left">
+              <span class="level-badge">21</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 21</span>
+                
+                <span class="writeup-desc">A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">cron</span>
+                
+                <span class="tag-pill">cronjob</span>
+                
+                <span class="tag-pill">bash</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_22/README.html"
+             class="writeup-item"
+             data-name="bandit level 22"
+             data-desc="a program is running automatically at regular intervals from cron, the time-based job scheduler. look in /etc/cron.d/ for the configuration and see what command is being executed."
+             data-tags="bandit,overthewire,cron,cronjob,bash,scripting,md5,linux">
+            <div class="writeup-item-left">
+              <span class="level-badge">22</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 22</span>
+                
+                <span class="writeup-desc">A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">cron</span>
+                
+                <span class="tag-pill">cronjob</span>
+                
+                <span class="tag-pill">bash</span>
+                
+                
+                <span class="tag-more">+3</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_23/README.html"
+             class="writeup-item"
+             data-name="bandit level 23"
+             data-desc="a program is running automatically at regular intervals from cron, the time-based job scheduler. look in /etc/cron.d/ for the configuration and see what command is being executed."
+             data-tags="bandit,overthewire,cron,cronjob,bash,scripting,suid">
+            <div class="writeup-item-left">
+              <span class="level-badge">23</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 23</span>
+                
+                <span class="writeup-desc">A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">cron</span>
+                
+                <span class="tag-pill">cronjob</span>
+                
+                <span class="tag-pill">bash</span>
+                
+                
+                <span class="tag-more">+2</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_24/README.html"
+             class="writeup-item"
+             data-name="bandit level 24"
+             data-desc="a daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. there is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing."
+             data-tags="bandit,overthewire,bruteforce,scripting,bash,netcat">
+            <div class="writeup-item-left">
+              <span class="level-badge">24</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 24</span>
+                
+                <span class="writeup-desc">A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">bruteforce</span>
+                
+                <span class="tag-pill">scripting</span>
+                
+                <span class="tag-pill">bash</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_25/README.html"
+             class="writeup-item"
+             data-name="bandit level 25"
+             data-desc="logging in to bandit26 from bandit25 should be fairly easy… the shell for user bandit26 is not /bin/bash, but something else. find out what it is, how it works and how to break out of it."
+             data-tags="bandit,overthewire,ssh,privatekey,shell,etcpasswd">
+            <div class="writeup-item-left">
+              <span class="level-badge">25</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 25</span>
+                
+                <span class="writeup-desc">Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">ssh</span>
+                
+                <span class="tag-pill">privatekey</span>
+                
+                <span class="tag-pill">shell</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_26/README.html"
+             class="writeup-item"
+             data-name="bandit level 26"
+             data-desc="good job getting a shell! now hurry and grab the password for bandit27!"
+             data-tags="bandit,overthewire,ssh,more,vim,shell,restrictedshell,escape">
+            <div class="writeup-item-left">
+              <span class="level-badge">26</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 26</span>
+                
+                <span class="writeup-desc">Good job getting a shell! Now hurry and grab the password for bandit27!</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">ssh</span>
+                
+                <span class="tag-pill">more</span>
+                
+                <span class="tag-pill">vim</span>
+                
+                
+                <span class="tag-more">+3</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_27/README.html"
+             class="writeup-item"
+             data-name="bandit level 27"
+             data-desc="there is a git repository at ssh://bandit27-git@bandit.labs.overthewire.org/home/bandit27-git/repo via the port 2220. the password for the user bandit27-git is the same as for the user bandit27."
+             data-tags="bandit,overthewire,git,gitclone">
+            <div class="writeup-item-left">
+              <span class="level-badge">27</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 27</span>
+                
+                <span class="writeup-desc">There is a git repository at ssh://bandit27-git@bandit.labs.overthewire.org/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">git</span>
+                
+                <span class="tag-pill">gitclone</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_28/README.html"
+             class="writeup-item"
+             data-name="bandit level 28"
+             data-desc="there is a git repository at ssh://bandit28-git@bandit.labs.overthewire.org/home/bandit28-git/repo via the port 2220. the password for the user bandit28-git is the same as for the user bandit28."
+             data-tags="bandit,overthewire,git,gitlog,gitshow,commithistory">
+            <div class="writeup-item-left">
+              <span class="level-badge">28</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 28</span>
+                
+                <span class="writeup-desc">There is a git repository at ssh://bandit28-git@bandit.labs.overthewire.org/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">git</span>
+                
+                <span class="tag-pill">gitlog</span>
+                
+                <span class="tag-pill">gitshow</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_29/README.html"
+             class="writeup-item"
+             data-name="bandit level 29"
+             data-desc="there is a git repository at ssh://bandit29-git@bandit.labs.overthewire.org/home/bandit29-git/repo via the port 2220. the password for the user bandit29-git is the same as for the user bandit29."
+             data-tags="bandit,overthewire,git,gitbranch,gitcheckout,gitlog">
+            <div class="writeup-item-left">
+              <span class="level-badge">29</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 29</span>
+                
+                <span class="writeup-desc">There is a git repository at ssh://bandit29-git@bandit.labs.overthewire.org/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">git</span>
+                
+                <span class="tag-pill">gitbranch</span>
+                
+                <span class="tag-pill">gitcheckout</span>
+                
+                
+                <span class="tag-more">+1</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_30/README.html"
+             class="writeup-item"
+             data-name="bandit level 30"
+             data-desc="there is a git repository at ssh://bandit30-git@bandit.labs.overthewire.org/home/bandit30-git/repo via the port 2220. the password for the user bandit30-git is the same as for the user bandit30."
+             data-tags="bandit,overthewire,git,gittag,gitshow">
+            <div class="writeup-item-left">
+              <span class="level-badge">30</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 30</span>
+                
+                <span class="writeup-desc">There is a git repository at ssh://bandit30-git@bandit.labs.overthewire.org/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">git</span>
+                
+                <span class="tag-pill">gittag</span>
+                
+                <span class="tag-pill">gitshow</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_31/README.html"
+             class="writeup-item"
+             data-name="bandit level 31"
+             data-desc="there is a git repository at ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo via the port 2220. the password for the user bandit31-git is the same as for the user bandit31."
+             data-tags="bandit,overthewire,git,gitpush,gitignore">
+            <div class="writeup-item-left">
+              <span class="level-badge">31</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 31</span>
+                
+                <span class="writeup-desc">There is a git repository at ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">git</span>
+                
+                <span class="tag-pill">gitpush</span>
+                
+                <span class="tag-pill">gitignore</span>
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_32/README.html"
+             class="writeup-item"
+             data-name="bandit level 32"
+             data-desc="after all this git stuff, it’s time for another escape. good luck!"
+             data-tags="bandit,overthewire,shell,escape,uppercase,bash,shellvariables">
+            <div class="writeup-item-left">
+              <span class="level-badge">32</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 32</span>
+                
+                <span class="writeup-desc">After all this git stuff, it’s time for another escape. Good luck!</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                <span class="tag-pill">shell</span>
+                
+                <span class="tag-pill">escape</span>
+                
+                <span class="tag-pill">uppercase</span>
+                
+                
+                <span class="tag-more">+2</span>
+                
+                 
+            </div>
+          </a>
+        
+      
+        
+          
+          <a href="/bandit/bandit_33/README.html"
+             class="writeup-item"
+             data-name="bandit level 33"
+             data-desc="the final level"
+             data-tags="bandit,overthewire">
+            <div class="writeup-item-left">
+              <span class="level-badge">33</span>
+              <div class="writeup-info">
+                <span class="writeup-name">Bandit Level 33</span>
+                
+                <span class="writeup-desc">The final level</span>
+                
+              </div>
+            </div>
+            <div class="writeup-item-right">
+              
+                
+                
+                
+                
+                
+                 
+            </div>
+          </a>
+        
+      
+    </div>
+
+    <!-- No results -->
+    <div class="no-results" id="noResults" style="display:none;">
+      <span class="prompt">george@kali:~$</span> grep: no matches found
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const items = Array.from(document.querySelectorAll('.writeup-item'));
+const searchInput = document.getElementById('searchInput');
+const noResults = document.getElementById('noResults');
+const shownCount = document.getElementById('shownCount');
+const tagBtns = document.querySelectorAll('.tag-btn');
+
+let activeTag = 'all';
+let searchQuery = '';
+
+shownCount.textContent = items.length;
+
+function filterItems() {
+  let visible = 0;
+  items.forEach(item => {
+    const name = item.dataset.name || '';
+    const desc = item.dataset.desc || '';
+    const tags = item.dataset.tags || '';
+    const matchesSearch = !searchQuery || name.includes(searchQuery) || desc.includes(searchQuery) || tags.includes(searchQuery);
+    const matchesTag = activeTag === 'all' || tags.split(',').includes(activeTag);
+    const show = matchesSearch && matchesTag;
+    item.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+  shownCount.textContent = visible;
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+}
+
+searchInput.addEventListener('input', () => {
+  searchQuery = searchInput.value.toLowerCase().trim();
+  filterItems();
+});
+
+tagBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tagBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTag = btn.dataset.tag;
+    filterItems();
+  });
+});
+
+const tagList = document.getElementById('tagList');
+const tagFilter = document.getElementById('tagFilter');
+const expandBtn = document.createElement('button');
+expandBtn.className = 'tag-expand-btn';
+expandBtn.innerHTML = '<span>show more ↓</span>';
+tagFilter.appendChild(expandBtn);
+expandBtn.addEventListener('click', () => {
+  const expanded = tagList.classList.toggle('expanded');
+  expandBtn.querySelector('span').textContent = expanded ? 'show less ↑' : 'show more ↓';
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 20 · Bandit Writeups</title>
+  <meta name="description" content="There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21)." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 20</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_20/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">setuid</span>
+            
+          
+            
+            <span class="tag-pill">suid</span>
+            
+          
+            
+            <span class="tag-pill">nc</span>
+            
+          
+            
+            <span class="tag-pill">networking</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-20"><a href="https://overthewire.org/wargames/bandit/bandit20.html">Bandit Level 20</a></h1>
+
+<ul>
+  <li>
+    <p>There’s a setuid binary called <code class="language-plaintext highlighter-rouge">suconnect</code> in the home directory. It connects to a port on localhost, reads one line of input, and if it matches the current level’s password it returns the next one.</p>
+  </li>
+  <li>
+    <p>The trick here is that <strong>we need to be the one listening</strong>. We set up a <code class="language-plaintext highlighter-rouge">nc</code> listener in the background that serves the current password, then run the binary pointing at our listener port.</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">echo "GbKksEFF4yrVs6il55v6gwY5aVje5f0j" | nc -lp 1234 &amp;</code> starts a listener in the background (<code class="language-plaintext highlighter-rouge">&amp;</code>) that will send the password to whoever connects.</li>
+      <li>Then <code class="language-plaintext highlighter-rouge">./suconnect 1234</code> connects to our listener, reads the password, validates it, and sends back the next one.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_20/b20_1.png" alt="" /></p>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">GbKksEFF4yrVs6il55v6gwY5aVje5f0j</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_19/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 19
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_21/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 21 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

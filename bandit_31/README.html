@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 31 · Bandit Writeups</title>
+  <meta name="description" content="There is a git repository at ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 31</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_31/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">git</span>
+            
+          
+            
+            <span class="tag-pill">gitpush</span>
+            
+          
+            
+            <span class="tag-pill">gitignore</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">There is a git repository at ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-31"><a href="https://overthewire.org/wargames/bandit/bandit31.html">Bandit Level 31</a></h1>
+
+<ul>
+  <li>The README in this repo says to create a file called <code class="language-plaintext highlighter-rouge">key.txt</code> with the content <code class="language-plaintext highlighter-rouge">May I come in?</code> and push it to the remote’s <code class="language-plaintext highlighter-rouge">master</code> branch.
+    <ul>
+      <li>The server checks what we push and responds with the password.</li>
+    </ul>
+  </li>
+  <li>Created the file and tried to <code class="language-plaintext highlighter-rouge">git add key.txt</code> but it was being ignored by <code class="language-plaintext highlighter-rouge">.gitignore</code> which had <code class="language-plaintext highlighter-rouge">*.txt</code> in it.
+    <ul>
+      <li>Used <code class="language-plaintext highlighter-rouge">git add -f key.txt</code> to <strong>force-add</strong> the file despite the <code class="language-plaintext highlighter-rouge">.gitignore</code> rule.</li>
+      <li>Then <code class="language-plaintext highlighter-rouge">git commit -m "push key"</code> and <code class="language-plaintext highlighter-rouge">git push origin master</code>.</li>
+      <li>The server validated the file content and returned the next password in the push response.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_31/b31_1.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_31/b31_2.png" alt="" /></p>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">47e603bb428404d265f59c42920d81e5</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_30/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 30
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_32/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 32 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

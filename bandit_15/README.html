@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandit Level 15 · Bandit Writeups</title>
+  <meta name="description" content="The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption." />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/bandit/assets/css/style.css" />
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="/bandit/" class="nav-logo">
+      <span class="prompt">~/george/bandit</span><span class="cursor-blink">_</span>
+    </a>
+    <div class="nav-right">
+      <a href="/bandit/" class="nav-link"><span class="cmd-prefix">./</span>index</a>
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer" class="nav-link"><span class="cmd-prefix">~/</span>portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<main class="writeup-main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/bandit/">bandit</a>
+      <span class="breadcrumb-sep">→</span>
+      <span>Bandit Level 15</span>
+    </div>
+
+    <!-- Header -->
+    <div class="writeup-header">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">bandit_15/README.md</span>
+      </div>
+      <div class="writeup-meta">
+        <span class="platform-badge otw">OverTheWire</span>
+        
+          
+            
+          
+            
+          
+            
+            <span class="tag-pill">ssl</span>
+            
+          
+            
+            <span class="tag-pill">tls</span>
+            
+          
+            
+            <span class="tag-pill">openssl</span>
+            
+          
+            
+            <span class="tag-pill">netcat</span>
+            
+          
+        
+        
+        <span class="writeup-meta-desc">The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.</span>
+        
+      </div>
+    </div>
+
+    <!-- Content -->
+    <article class="writeup-content">
+      <h1 id="bandit-level-15"><a href="https://overthewire.org/wargames/bandit/bandit15.html">Bandit Level 15</a></h1>
+
+<ul>
+  <li>
+    <p>The goal here is to submit the current level’s password to port <strong>30001</strong> on localhost, but this time the connection must be made using <strong>SSL/TLS encryption</strong> (<code class="language-plaintext highlighter-rouge">nc</code> won’t work).</p>
+  </li>
+  <li>
+    <p>For SSL connections we use <code class="language-plaintext highlighter-rouge">openssl s_client</code>, which is the standard tool for connecting to SSL/TLS-enabled services from the command line.</p>
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">-connect</code> flag specifies the host and port in <code class="language-plaintext highlighter-rouge">host:port</code> format.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">-ign_eof</code> flag tells openssl not to close the connection when it hits EOF, giving us time to type/paste the password.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/bandit/bandit_15/b15_1.png" alt="" /></p>
+
+<ul>
+  <li>Connected to the local service on port 30001 via SSL.</li>
+</ul>
+
+<p><img src="/bandit/bandit_15/b15_2.png" alt="" /></p>
+
+<ul>
+  <li>Pasted the current level’s password. The service responded with <code class="language-plaintext highlighter-rouge">Correct!</code> and returned the next password.</li>
+</ul>
+
+<p><img src="/bandit/bandit_15/b15_3.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_15/b15_4.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_15/b15_5.png" alt="" /></p>
+
+<p><img src="/bandit/bandit_15/b15_6.png" alt="" /></p>
+
+<h3 id="password">Password</h3>
+
+<p><code class="language-plaintext highlighter-rouge">BfMYroe26WYalil77FoDi9qh59eK5xNr</code></p>
+
+    </article>
+
+    <!-- Prev / Next navigation -->
+    
+    
+    
+
+    
+    
+
+    <div class="level-nav">
+      
+        
+        
+        <a href="/bandit/bandit_14/README.html" class="level-nav-btn level-nav-prev">
+          ← Bandit Level 14
+        </a>
+      
+
+      <a href="/bandit/" class="btn-ghost">↑ Index</a>
+
+      
+        
+        
+        
+        <a href="/bandit/bandit_16/README.html" class="level-nav-btn level-nav-next">
+          Bandit Level 16 →
+        </a>
+        
+      
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-text"><span class="prompt">george@kali:~$</span> echo "George Nădejde · Bandit Writeups"</span>
+    <div class="footer-links">
+      <a href="https://georgenadejde.github.io" target="_blank" rel="noopener noreferrer">Portfolio</a>
+      <a href="https://github.com/georgenadejde" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
