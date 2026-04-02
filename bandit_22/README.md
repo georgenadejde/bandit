@@ -11,6 +11,7 @@ tags:
   - scripting
   - md5
   - linux
+level: 22
 ---
 # [Bandit Level 22](https://overthewire.org/wargames/bandit/bandit22.html)
 

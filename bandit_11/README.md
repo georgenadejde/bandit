@@ -8,6 +8,7 @@ tags:
   - rot13
   - tr
   - encoding
+level: 11
 ---
 # [Bandit Level 11](https://overthewire.org/wargames/bandit/bandit11.html)
 

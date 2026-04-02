@@ -9,6 +9,7 @@ tags:
   - scripting
   - bash
   - netcat
+level: 24
 ---
 # [Bandit Level 24](https://overthewire.org/wargames/bandit/bandit24.html)
 

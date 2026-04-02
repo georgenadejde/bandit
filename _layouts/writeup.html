@@ -69,7 +69,7 @@
     </article>
 
     <!-- Prev / Next navigation -->
-    {% assign all_levels = site.pages | where: "name", "README.md" | sort: "path" %}
+    {% assign all_levels = site.pages | where: "name", "README.md" | sort: "level" %}
     {% assign writeup_levels = "" | split: "" %}
     {% for p in all_levels %}
       {% if p.layout == "writeup" %}

@@ -7,6 +7,7 @@ tags:
   - overthewire
   - ssh
   - privatekey
+level: 13
 ---
 # [Bandit Level 13](https://overthewire.org/wargames/bandit/bandit13.html)
 

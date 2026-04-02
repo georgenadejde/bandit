@@ -8,6 +8,7 @@ tags:
   - setuid
   - suid
   - permissions
+level: 19
 ---
 # [Bandit Level 19](https://overthewire.org/wargames/bandit/bandit19.html)
 

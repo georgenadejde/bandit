@@ -7,6 +7,7 @@ tags:
   - overthewire
   - diff
   - filecomparison
+level: 17
 ---
 # [Bandit Level 17](https://overthewire.org/wargames/bandit/bandit17.html)
 

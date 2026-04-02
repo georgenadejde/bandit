@@ -7,6 +7,7 @@ tags:
   - overthewire
   - git
   - gitclone
+level: 27
 ---
 # [Bandit Level 27](https://overthewire.org/wargames/bandit/bandit27.html)
 

@@ -9,6 +9,7 @@ tags:
   - privatekey
   - shell
   - etcpasswd
+level: 25
 ---
 # [Bandit Level 25](https://overthewire.org/wargames/bandit/bandit25.html)
 

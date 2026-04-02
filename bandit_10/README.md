@@ -7,6 +7,7 @@ tags:
   - overthewire
   - base64
   - encoding
+level: 10
 ---
 # [Bandit Level 10](https://overthewire.org/wargames/bandit/bandit10.html)
 

@@ -8,6 +8,7 @@ tags:
   - git
   - gittag
   - gitshow
+level: 30
 ---
 # [Bandit Level 30](https://overthewire.org/wargames/bandit/bandit30.html)
 

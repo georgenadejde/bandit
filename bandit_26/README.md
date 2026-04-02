@@ -11,6 +11,7 @@ tags:
   - shell
   - restrictedshell
   - escape
+level: 26
 ---
 # [Bandit Level 26](https://overthewire.org/wargames/bandit/bandit26.html)
 

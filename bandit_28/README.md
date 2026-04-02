@@ -9,6 +9,7 @@ tags:
   - gitlog
   - gitshow
   - commithistory
+level: 28
 ---
 # [Bandit Level 28](https://overthewire.org/wargames/bandit/bandit28.html)
 

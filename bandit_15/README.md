@@ -9,6 +9,7 @@ tags:
   - tls
   - openssl
   - netcat
+level: 15
 ---
 # [Bandit Level 15](https://overthewire.org/wargames/bandit/bandit15.html)
 

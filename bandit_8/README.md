@@ -7,6 +7,7 @@ tags:
   - overthewire
   - sort
   - uniq
+level: 8
 ---
 # [Bandit Level 8](https://overthewire.org/wargames/bandit/bandit8.html)
 

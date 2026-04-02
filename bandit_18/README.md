@@ -7,6 +7,7 @@ tags:
   - overthewire
   - ssh
   - bashrc
+level: 18
 ---
 # [Bandit Level 18](https://overthewire.org/wargames/bandit/bandit18.html)
 

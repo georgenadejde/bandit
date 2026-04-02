@@ -12,6 +12,7 @@ tags:
   - portscanning
   - ssh
   - privatekey
+level: 16
 ---
 # [Bandit Level 16](https://overthewire.org/wargames/bandit/bandit16.html)
 

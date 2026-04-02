@@ -87,7 +87,7 @@
 
     <!-- Level list -->
     <div class="writeup-list" id="writeupList">
-      {% assign levels = site.pages | where: "name", "README.md" | sort: "path" %}
+      {% assign levels = site.pages | where: "name", "README.md" | sort: "level" %}
       {% assign level_num = 0 %}
       {% for page in levels %}
         {% if page.layout == "writeup" %}

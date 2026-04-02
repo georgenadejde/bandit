@@ -10,6 +10,7 @@ tags:
   - bash
   - scripting
   - suid
+level: 23
 ---
 # [Bandit Level 23](https://overthewire.org/wargames/bandit/bandit23.html)
 

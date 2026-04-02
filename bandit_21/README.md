@@ -9,6 +9,7 @@ tags:
   - cronjob
   - bash
   - scripting
+level: 21
 ---
 # [Bandit Level 21](https://overthewire.org/wargames/bandit/bandit21.html)
 

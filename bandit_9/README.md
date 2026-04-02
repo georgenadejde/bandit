@@ -9,6 +9,7 @@ tags:
   - grep
   - binary
   - linux
+level: 9
 ---
 # [Bandit Level 9](https://overthewire.org/wargames/bandit/bandit9.html)
 

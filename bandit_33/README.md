@@ -5,6 +5,7 @@ description: The final level
 tags:
   - bandit
   - overthewire
+level: 33
 ---
 # [Bandit Level 33](https://overthewire.org/wargames/bandit/bandit33.html)
 

@@ -8,6 +8,7 @@ tags:
   - git
   - gitpush
   - gitignore
+level: 31
 ---
 # [Bandit Level 31](https://overthewire.org/wargames/bandit/bandit31.html)
 

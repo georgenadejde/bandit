@@ -9,6 +9,7 @@ tags:
   - gitbranch
   - gitcheckout
   - gitlog
+level: 29
 ---
 # [Bandit Level 29](https://overthewire.org/wargames/bandit/bandit29.html)
 

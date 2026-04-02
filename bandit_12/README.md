@@ -10,6 +10,7 @@ tags:
   - gzip
   - bzip2
   - tar
+level: 12
 ---
 # [Bandit Level 12](https://overthewire.org/wargames/bandit/bandit12.html)
 

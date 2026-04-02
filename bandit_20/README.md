@@ -9,6 +9,7 @@ tags:
   - suid
   - nc
   - networking
+level: 20
 ---
 # [Bandit Level 20](https://overthewire.org/wargames/bandit/bandit20.html)
 

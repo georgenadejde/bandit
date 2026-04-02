@@ -8,6 +8,7 @@ tags:
   - netcat
   - nc
   - networking
+level: 14
 ---
 # [Bandit Level 14](https://overthewire.org/wargames/bandit/bandit14.html)
 

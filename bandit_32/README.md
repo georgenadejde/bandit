@@ -10,6 +10,7 @@ tags:
   - uppercase
   - bash
   - shellvariables
+level: 32
 ---
 # [Bandit Level 32](https://overthewire.org/wargames/bandit/bandit32.html)
 
